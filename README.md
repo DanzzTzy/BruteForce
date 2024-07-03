@@ -1,8 +1,8 @@
-<img src="https://j.top4top.io/p_2185svekl0.jpg">
+<img src="https://c.top4top.io/p_3106plywk0.jpg">
 # WORDPRESS BRUTEFORCE
 
 
-* git clone https://github.com/BrebesBlackXploit/wpbf
-* cd wpbf
-* bash t.sh
+* git clone https://github.com/DanzzTzy/BruteForce-
+* cd BruteForce-
+* bash p.sh
 
